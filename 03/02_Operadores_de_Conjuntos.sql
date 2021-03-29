@@ -37,10 +37,10 @@ SELECT department_id, location_id,  TO_DATE(null)
 FROM   departments;
 
 --Exemplo slide 23
-SELECT employee_id, job_id,salary
+SELECT employee_id, job_id,to_char(salary)
 FROM   employees
 UNION
-SELECT employee_id, job_id,0
+SELECT employee_id, job_id, 'Sem salário'
 FROM   job_history;
 
 --24

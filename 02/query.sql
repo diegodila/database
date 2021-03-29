@@ -6,7 +6,7 @@ select E.last_name, D.department_name
 from employees E INNER join departments D
 on (E.DEPARTMENT_ID=D.DEPARTMENT_ID);
 
-select E.last_name, D.department_name
+select E.last_name, D.department_name, E.department_id, D.department_id
 from employees E LEFT OUTER join departments D
 on (E.DEPARTMENT_ID=D.DEPARTMENT_ID);
 
