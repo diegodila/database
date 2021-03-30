@@ -81,9 +81,11 @@ on (a.EMPLOYEE_ID=b.MANAGER_ID);
 select a.last_name, a.manager_id, b.employee_id, b.last_name CHEF
 FROM EMPLOYEES A join  EMPLOYEES B
 on (A.MANAGER_ID=b.EMPLOYEE_ID);
-
 -------------------------------------------------------------------
-
+select a.EMPLOYEE_ID, a.LAST_NAME, b.MANAGER_ID, b.EMPLOYEE_ID, b.LAST_NAME
+FROM EMPLOYEES A join  EMPLOYEES B
+on (A.EMPLOYEE_ID=b.MANAGER_ID);
+-------------------------------------------------------------------
 select a.EMPLOYEE_ID,b.MANAGER_ID, a.last_name manager, b.last_name worker, a.MANAGER_ID manager, b.MANAGER_ID worker
 from EMPLOYEES a join EMPLOYEES b
 on (b.MANAGER_ID=a.EMPLOYEE_ID);
