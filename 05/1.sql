@@ -1,37 +1,63 @@
---SEQUENCE
-CREATE SEQUENCE dept_deptid_seq;
+--VIEWS
 
-DROP SEQUENCE dept_deptid_seq;;
-
-CREATE SEQUENCE dept_deptid_seq
-                INCREMENT BY 10
-                START WITH 120
-                MAXVALUE 9999
-                NOCACHE
-                NOCYCLE;
-INSERT INTO departments(department_id, department_name, location_id)
-VALUES      (dept_deptid_seq.NEXTVAL, 'Support', 2500);
+CREATE VIEW 	empvu80
+ AS SELECT  employee_id, last_name, salary
+    FROM    employees
+    WHERE   department_id = 80;
+	
+DESCRIBE empvu80;
 
 
-SELECT	dept_deptid_seq.CURRVAL
-FROM	dual;
+CREATE VIEW 	salvu50
+ AS SELECT  employee_id ID_NUMBER, last_name NAME,
+            salary*12 ANN_SALARY
+    FROM    employees
+    WHERE   department_id = 50;
 
-ALTER SEQUENCE dept_deptid_seq
-               INCREMENT BY 20
-               MAXVALUE 999999
-               NOCACHE
-               NOCYCLE;
 
-DROP SEQUENCE dept_deptid_seq;
+SELECT *
+FROM   salvu50;
 
---INDEX
-CREATE INDEX 	emp_last_name_idx
-ON 		employees(last_name);
+CREATE OR REPLACE VIEW empvu80
+  (id_number, name, sal, department_id)
+AS SELECT  employee_id, first_name || ' ' 
+           || last_name, salary, department_id
+   FROM    employees
+   WHERE   department_id = 80;
 
-DROP INDEX emp_last_name_idx;
+CREATE VIEW	dept_sum_vu
+  (name, minsal, maxsal, avgsal)
+AS SELECT	 d.department_name, MIN(e.salary), 
+             MAX(e.salary),AVG(e.salary)
+   FROM      employees e, departments d
+   WHERE     e.department_id = d.department_id 
+   GROUP BY  d.department_name;
 
---SYNONYM
-CREATE SYNONYM  d_sum
-FOR  dept_sum_vu;
+CREATE OR REPLACE VIEW empvu20
+AS SELECT	*
+   FROM     employees
+   WHERE    department_id = 20
+   WITH CHECK OPTION CONSTRAINT empvu20_ck;
 
-DROP SYNONYM d_sum;
+
+CREATE OR REPLACE VIEW empvu10
+    (employee_number, employee_name, job_title)
+AS SELECT	employee_id, last_name, job_id
+   FROM     employees
+   WHERE    department_id = 10
+   WITH READ ONLY ;
+
+CREATE OR REPLACE VIEW empvu20
+AS SELECT	*
+   FROM     employees
+   WHERE    department_id = 20;
+
+update empvu10
+set empvu10.employee_name = 'Chicao';
+
+select * from empvu20;
+update empvu20
+set DEPARTMENT_ID = 10
+where EMPLOYEE_ID=201;
+
+DROP VIEW empvu80;
