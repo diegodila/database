@@ -6,6 +6,30 @@ CREATE VIEW 	empvu80
     WHERE   department_id = 80;
 	
 DESCRIBE empvu80;
+desc empvu80;
+
+select  *
+from empvu80;
+
+update empvu80
+set salary=15000; --sem where ele avisa
+
+update empvu80
+set salary=15000
+where employee_id=145;
+
+select *
+from empvu80;
+
+select salary
+from EMPLOYEES
+    where EMPLOYEE_ID=145;
+
+delete from empvu80
+where employee_id=145;
+
+insert into empvu80
+values (1000,'Zezao',5000);
 
 
 CREATE VIEW 	salvu50
@@ -20,7 +44,7 @@ FROM   salvu50;
 
 CREATE OR REPLACE VIEW empvu80
   (id_number, name, sal, department_id)
-AS SELECT  employee_id, first_name || ' ' 
+AS SELECT  employee_id, first_name || ' '
            || last_name, salary, department_id
    FROM    employees
    WHERE   department_id = 80;
@@ -32,6 +56,8 @@ AS SELECT	 d.department_name, MIN(e.salary),
    FROM      employees e, departments d
    WHERE     e.department_id = d.department_id 
    GROUP BY  d.department_name;
+
+select * from dept_sum_vu;
 
 CREATE OR REPLACE VIEW empvu20
 AS SELECT	*
