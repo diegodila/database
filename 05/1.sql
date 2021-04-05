@@ -87,3 +87,13 @@ set DEPARTMENT_ID = 10
 where EMPLOYEE_ID=201;
 
 DROP VIEW empvu80;
+
+
+CREATE OR REPLACE VIEW empvu20 AS
+SELECT *
+FROM   employees
+WHERE  department_id = 20
+WITH CHECK OPTION CONSTRAINT empvu20_ck;
+
+SELECT employee_id, job_id, salary, department_id
+FROM empvu20;
