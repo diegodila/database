@@ -8,9 +8,7 @@ CREATE VIEW 	empvu80
 select pf0645.dept_deptid_seq.nextval
 from dual;
 
-	
 DESCRIBE empvu80
-
 
 CREATE VIEW 	salvu50
  AS SELECT  employee_id ID_NUMBER, last_name NAME,
