@@ -31,3 +31,4 @@ commit;
 SELECT elementos_A FROM TABELA_A;
 SELECT elementos_B FROM TABELA_B;
 SELECT elementos_C FROM TABELA_C;
+

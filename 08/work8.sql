@@ -131,3 +131,33 @@ DROP TABLE DEPT;
 CREATE TABLE DEPT (DEPT_ID,DEPT_NAME)
 AS SELECT DEPARTMENT_ID,DEPARTMENT_NAME
 FROM DEPARTMENTS;--CTAS
+
+
+select elementos_a, elementos_b
+from tabela_a, tabela_b;
+
+select elementos_a
+from tabela_a;
+
+select elementos_a
+from tabela_a
+union all
+select elementos_b
+from tabela_b;
+
+select elementos_a, elementos_b
+from tabela_a full outer join tabela_b
+on elementos_a=elementos_b;
+
+select elementos_a, elementos_b
+from tabela_a right outer join tabela_b
+on elementos_a=elementos_b;
+
+select elementos_b
+from tabela_b
+minus
+select elementos_a
+from tabela_a
+intersect
+select elementos_a
+from tabela_a;
