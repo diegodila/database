@@ -16,7 +16,7 @@ where last_name='Pataballa';
 select seq_b.currval
 from dual;
 
-DROP SEQUENCE dept_deptid_seq;;
+DROP SEQUENCE dept_deptid_seq;
 
 CREATE SEQUENCE dept_deptid_seq
                 INCREMENT BY 10

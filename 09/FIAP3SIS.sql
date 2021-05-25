@@ -1,0 +1,80 @@
+SET SERVEROUTPUT ON
+CLEAR SCREEN
+
+ACCEPT P_REGION_NAME PROMPT 'Informe o nome da região que deseja cadastrar'
+DECLARE
+    V_REGION_NAME REGIONS.REGION_NAME%TYPE := &P_REGION_NAME;
+BEGIN
+    DELETE REGIONS
+    WHERE REGION_ID=10;
+    COMMIT;
+
+    INSERT INTO REGIONS
+    VALUES (10,V_REGION_NAME);
+    DBMS_OUTPUT.PUT_LINE(SQL%ROWCOUNT || ' Linha(s) atualizou(s)');
+    COMMIT;
+
+    UPDATE REGIONS
+    SET REGION_NAME='Latin American'
+    WHERE REGION_ID=10;
+    ROLLBACK;
+
+END;
+/
+
+desc regions
+
+select DEPARTMENT_ID
+from employees;
+
+DROP SEQUENCE REGIONS_SEQ;
+CREATE SEQUENCE REGIONS_SEQ
+                INCREMENT BY 1
+                START WITH 5
+                MAXVALUE 9999
+                NOCACHE
+                NOCYCLE;
+
+ACCEPT P_REGION_NAME PROMPT 'Informe o nome da região que deseja cadastrar'
+DECLARE
+    V_REGION_NAME REGIONS.REGION_NAME%TYPE := '&P_REGION_NAME';
+    V_ID REGIONS.REGION_ID%TYPE := REGIONS_SEQ.NEXTVAL;
+BEGIN
+    INSERT INTO REGIONS
+    VALUES (REGIONS_SEQ.NEXTVAL,V_REGION_NAME);
+    DBMS_OUTPUT.PUT_LINE(SQL%ROWCOUNT || ' Linha(s) inserida(s)');
+    DBMS_OUTPUT.PUT_LINE('A região de código '||V_ID||' de nome: '||V_REGION_NAME||' foi cadastrada com sucesso!');
+    COMMIT;
+
+END;
+/
+
+
+DROP SEQUENCE REGIONS_SEQ;
+CREATE SEQUENCE REGIONS_SEQ
+                INCREMENT BY 1
+                START WITH 5
+                MAXVALUE 9999
+                NOCACHE
+                NOCYCLE;
+                
+                
+                
+                
+                
+CLEAR SCREEN
+SET SERVEROUTPUT ON
+ACCEPT P_DEPARTAMENT_NUMBER PROMPT 'Informe o número do departamento
+DECLARE
+    V_DEPARTAMENT_NUMBER EMPLOYEES.DEPARTMENT_ID%TYPE := '&P_DEPARTAMENT_NUMBER';
+    V_ID V_DEPARTAMENT_NUMBER%TYPE := V_DEPARTAMENT_NUMBER;
+BEGIN
+    SELECT  MAX(SALARY)
+    INTO V_DEPARTAMENT_NUMBER
+    FROM EMPLOYEES
+    WHERE DEPARTMENT_ID=V_DEPARTAMENT_NUMBER;
+    
+    DBMS_OUTPUT.PUT_LINE('O maior salário do departamento:'||V_ID||' é de: '||V_DEPARTAMENT_NUMBER);
+    
+END;
+/
