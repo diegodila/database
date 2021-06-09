@@ -57,14 +57,12 @@ CREATE SEQUENCE REGIONS_SEQ
                 MAXVALUE 9999
                 NOCACHE
                 NOCYCLE;
-                
-                
-                
+
                 
                 
 CLEAR SCREEN
 SET SERVEROUTPUT ON
-ACCEPT P_DEPARTAMENT_NUMBER PROMPT 'Informe o número do departamento
+ACCEPT P_DEPARTAMENT_NUMBER PROMPT 'Informe o número do departamento'
 DECLARE
     V_DEPARTAMENT_NUMBER EMPLOYEES.DEPARTMENT_ID%TYPE := '&P_DEPARTAMENT_NUMBER';
     V_ID V_DEPARTAMENT_NUMBER%TYPE := V_DEPARTAMENT_NUMBER;
@@ -75,6 +73,5 @@ BEGIN
     WHERE DEPARTMENT_ID=V_DEPARTAMENT_NUMBER;
     
     DBMS_OUTPUT.PUT_LINE('O maior salário do departamento:'||V_ID||' é de: '||V_DEPARTAMENT_NUMBER);
-    
 END;
 /
