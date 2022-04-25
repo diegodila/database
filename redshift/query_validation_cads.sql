@@ -10,7 +10,7 @@ from (select midia,
 		round(sum(impressions),0) as impressions,
 		date
 		from datamarts.tb_consolidada_geral_dia tcgd
-		where (date >= current_date-1)
+		where (date >= current_date-3)
 		and (campaignname like '%cad1-%')
 		and (midia in ('google','criteo','bing', 'facebook'))
 		group by 1,date) cad1
@@ -20,7 +20,7 @@ full join
 		round(sum(impressions),0) as impressions,
 		date
 		from datamarts.tb_consolidada_geral_dia tcgd
-		where (date >= current_date-1)
+		where (date >= current_date-3)
 		and (campaignname like '%cad3-%')
 		and (midia in ('google','criteo','bing', 'facebook'))
 		group by 1,date) cad3
@@ -31,7 +31,7 @@ full join
 		round(sum(impressions),0) as impressions,
 		date
 		from datamarts.tb_consolidada_geral_dia tcgd
-		where (date >= current_date-1)
+		where (date >= current_date-3)
 		and (campaignname like '%cad12-%')
 		and (midia in ('google','criteo','bing', 'facebook'))
 		group by 1,date) cad12
@@ -42,7 +42,7 @@ full join
 		round(sum(impressions),0) as impressions,
 		date
 		from datamarts.tb_consolidada_geral_dia tcgd
-		where (date >= current_date-1)
+		where (date >= current_date-3)
 		and (campaignname like '%cad26-%')
 		and (midia in ('google','criteo','bing', 'facebook'))
 		group by 1,date) cad26
@@ -53,7 +53,7 @@ full join
 		round(sum(impressions),0) as impressions,
 		date
 		from datamarts.tb_consolidada_geral_dia tcgd
-		where (date >= current_date-1)
+		where (date >= current_date-3)
 		and (campaignname like '%cad42-%')
 		and (midia in ('google','criteo','bing', 'facebook'))
 		group by 1,date) cad42
