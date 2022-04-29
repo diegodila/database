@@ -1,0 +1,10 @@
+docker run --name teste-postgres --network=postgres-network -e "POSTGRES_PASSWORD=Postgres2018!" -p 5432:5432 -v /home/renatogroffe/Desenvolvimento/PostgreSQL:/var/lib/postgresql/data -d postgres
+
+
+docker run --name postgresql \
+-p 5432:5432 \
+-e POSTGRES_USER=diegodila \
+-e POSTGRES_PASSWORD=admin! \
+-e PGDATA=/var/lib/postgresql/data/pgdata \
+-e POSTGRES_DB=postgresD \
+-v $HOME/Projects/database/postgresql:/var/lib/postgresql/data -d postgres
