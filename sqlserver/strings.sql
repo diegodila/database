@@ -1,6 +1,5 @@
 --
 
-Production.Product as product
 use AdventureWorks
 select concat(datepart(dd,OrderDate),'-',datepart(mm,OrderDate)) as DM
 from Sales.SalesOrderHeader
