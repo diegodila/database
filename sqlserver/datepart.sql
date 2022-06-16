@@ -21,3 +21,6 @@ from Sales.SalesOrderHeader
 select avg(TotalDue) totalDue_avg, datepart(mm,OrderDate) as month
 from sales.SalesOrderHeader
 group by datepart(mm,OrderDate) order by month
+
+select concat(datepart(dd,OrderDate),'-',datepart(mm,OrderDate)) as DM
+from Sales.SalesOrderHeader
