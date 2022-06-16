@@ -12,3 +12,12 @@ SELECT
    DATEPART(hour, @d) hour,
    DATEPART(minute, @d) minute,
    DATEPART(second, @d) second;
+
+select SalesOrderID, datepart(mm, OrderDate) as date
+from Sales.SalesOrderHeader
+
+-- pegar a media do totaldue por mes na tabela sales.salesOrderHeader
+
+select avg(TotalDue) totalDue_avg, datepart(mm,OrderDate) as month
+from sales.SalesOrderHeader
+group by datepart(mm,OrderDate) order by month
