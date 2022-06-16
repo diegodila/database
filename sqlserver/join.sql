@@ -1,13 +1,12 @@
--- buscar essas informações BusinessEntityID, Firstname, LastName,EmailAdress
+-- left outer join
+-- left join
 
-select top 10 * from person.Person
+-- descobrir quais pessoas tem um cartão de credito registrado
 
-select top 10 * from person.EmailAddress
-
-select count(*) as diego
-from Person.Person ED
-inner join Person.EmailAddress EA on ED.BusinessEntityID = EA.BusinessEntityID
-
+select *
+from person.person
+left join sales.PersonCreditCard on Person.BusinessEntityID = PersonCreditCard.BusinessEntityID
+where PersonCreditCard.BusinessEntityID is null
 
 
-';
+select * from person.Person
