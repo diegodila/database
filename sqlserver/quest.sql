@@ -1,0 +1,1 @@
+-- some duas colunas da tabela salesOrderDetail
