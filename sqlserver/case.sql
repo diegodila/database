@@ -19,6 +19,7 @@ FROM test;
 
 -- Define the CTE expression name and column list.
 WITH Sales_CTE (SalesPersonID, SalesOrderID, SalesYear)
+
 AS
 -- Define the CTE query.
 (
