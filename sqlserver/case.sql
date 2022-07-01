@@ -77,11 +77,20 @@ FROM Production.Product
 ORDER BY ProductNumber ;
 
 
+SELECT BusinessEntityID, SalariedFlag
+FROM HumanResources.Employee
+ORDER BY CASE SalariedFlag WHEN 1 THEN BusinessEntityID END DESC
+        ,CASE WHEN SalariedFlag = 0 THEN BusinessEntityID END;
+
+SELECT BusinessEntityID, SalariedFlag
+FROM HumanResources.Employee
+
+
 
 
 
 /*
- 1. transforme o productLine em category 'R' = 'Road', 'M' = 'Mountain','T' = 'Touring', 'S' = 'Other sale items' se não 'Not for sale'  (Production.Product)
+ 1. Selecione o productNumber e o name transforme o productLine em category 'R' = 'Road', 'M' = 'Mountain','T' = 'Touring', 'S' = 'Other sale items' se não 'Not for sale'  (Production.Product)
 
  2.Selecione o productNumner e o name e depois pesquise o listPrice e transforme em pricerange quando:
     listprice = 0 sera 'Mfg item - not for resale'
@@ -91,30 +100,3 @@ ORDER BY ProductNumber ;
 senao 'over 1000'
  */
 
-select ProductNumber, Category =
-                      case ProductLine
-                          when 'R' then 'Road'
-                          when 'M' then 'Montain'
-                          when 'T' then 'Touring'
-                          when 'S' then 'Other sale items'
-                          else 'Not for sale' end,
-    Name
-from production.Product
-
-select ProductNumber, Name, PriceRange = Case
-    when ListPrice = 0 then 'MFG - not for resale'
-    when ListPrice < 50 then 'Under 50'
-when ListPrice >= 50 and ListPrice <= 250 then 'Under 250'
-when ListPrice >= 250 and ListPrice <= 1000 then 'Under 1000'
-else 'Over 1000' end
-from Production.Product
-order by ProductNumber;
-
-select ProductNumber, Name, PriceRange = Case
-    when ListPrice = 0 then 'MFG - not for resale'
-    when ListPrice < 50 then 'Under 50'
-when ListPrice >= 50 and ListPrice <= 250 then 'Under 250'
-when ListPrice >= 250 and ListPrice <= 1000 then 'Under 1000'
-else 'Over 1000' end
-from Production.Product
-order by ProductNumber;
