@@ -84,19 +84,3 @@ ORDER BY CASE SalariedFlag WHEN 1 THEN BusinessEntityID END DESC
 
 SELECT BusinessEntityID, SalariedFlag
 FROM HumanResources.Employee
-
-
-
-
-
-/*
- 1. Selecione o productNumber e o name transforme o productLine em category 'R' = 'Road', 'M' = 'Mountain','T' = 'Touring', 'S' = 'Other sale items' se não 'Not for sale'  (Production.Product)
-
- 2.Selecione o productNumner e o name e depois pesquise o listPrice e transforme em pricerange quando:
-    listprice = 0 sera 'Mfg item - not for resale'
- < 50 'Under 50'
- >= 50 and < 250 = 'under 250'
- >= 250 and < 1000 = 'under 1000'
-senao 'over 1000'
- */
-

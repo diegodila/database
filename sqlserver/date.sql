@@ -23,7 +23,6 @@ SELECT GETDATE() AS GETDATE
 select DateCreated from Sales.ShoppingCartItem
 where DateCreated between '2010-01-01' and cast(getdate() as date)
 
-
 SELECT * FROM Person.Person
 WHERE ModifiedDate BETWEEN '2014' AND GETDATE()
 ORDER BY ModifiedDate DESC
