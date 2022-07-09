@@ -27,4 +27,6 @@ SELECT * FROM Person.Person
 WHERE ModifiedDate BETWEEN '2014' AND GETDATE()
 ORDER BY ModifiedDate DESC
 
+select cast(getdate() as time) time
 
+select cast(getdate() as datetime) datetime

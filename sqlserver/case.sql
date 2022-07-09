@@ -7,32 +7,6 @@ with test as (
 select * from test
 
 
-    
-WITH test (PersonType)
-AS
-(
-	SELECT PersonType FROM Person.Person p
-)
-SELECT *
-FROM test;
-
-
--- Define the CTE expression name and column list.
-WITH Sales_CTE (SalesPersonID, SalesOrderID, SalesYear)
-
-AS
--- Define the CTE query.
-(
-    SELECT SalesPersonID, SalesOrderID, YEAR(OrderDate) AS SalesYear
-    FROM Sales.SalesOrderHeader
-    WHERE SalesPersonID IS NOT NULL
-)
--- Define the outer query referencing the CTE name.
-SELECT SalesPersonID, COUNT(SalesOrderID) AS TotalSales, SalesYear
-FROM Sales_CTE
-GROUP BY SalesYear, SalesPersonID
-ORDER BY SalesPersonID, SalesYear;
-
 
 -- Syntax for SQL Server, Azure SQL Database and Azure Synapse Analytics
 

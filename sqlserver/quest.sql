@@ -26,3 +26,9 @@
 senao 'over 1000'
  */
 
+
+/*     ****** RESULTADOS NO isnull.SQL *******
+ 1. selecione todas as colunas da tabela person que tem o suffix nulo
+ 2. tranforme os dados da tabela person e coluna suffix que são nulos em goiaba *, a coluna transformada deverá chamar énulo
+ 3. Converta os endereços secundários em endereços primarios da tabela person.address
+ */
