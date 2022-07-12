@@ -16,6 +16,7 @@
  5.saber a media de preco para os produtos que sao pratas(silver)
  */
 
+
 /*     ****** RESULTADOS NO case.SQL *******
  1. Selecione o productNumber e o name transforme o productLine em category 'R' = 'Road', 'M' = 'Mountain','T' = 'Touring', 'S' = 'Other sale items' se não 'Not for sale'  (Production.Product)
  2.Selecione o productNumber e o name e depois pesquise o listPrice e transforme em pricerange quando:

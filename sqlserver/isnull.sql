@@ -6,7 +6,7 @@ where Suffix is null
 select isnull(Suffix,'cadhh') énulo,*
 from Person.Person
 --3
-select AddressLine1, AddressLine2, isnull(AddressLine2,AddressLine1 ) from person.Address
+select AddressLine1, AddressLine2, isnull(AddressLine2,AddressLine1) from person.Address
 
 
 /*

@@ -1,3 +1,6 @@
+/*
+ caso de uso: quando criamos um alias para uma coluna, ou criamos uma coluna nova e queremos ter uma codição de seleção como where nessa coluna, utilizamos o cte como uma view temporária para fazer essa seleção
+ */
 WITH test AS (
         SELECT CASE		WHEN	SUBSTRING([SalesOrderNumber],1,3) = 'SO4' THEN 'ser'
         ELSE				SUBSTRING([SalesOrderNumber],1,3)

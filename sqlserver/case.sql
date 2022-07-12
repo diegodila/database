@@ -27,6 +27,7 @@ END
 
 USE AdventureWorks
 GO
+--1
 SELECT   ProductNumber, Category =
       CASE ProductLine
          WHEN 'R' THEN 'Road'
@@ -39,6 +40,7 @@ SELECT   ProductNumber, Category =
 FROM Production.Product
 ORDER BY ProductNumber;
 
+--2
 SELECT   ProductNumber, Name, "Price Range" =
       CASE
          WHEN ListPrice =  0 THEN 'Mfg item - not for resale'

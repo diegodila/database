@@ -1,3 +1,79 @@
+/*
+ -- Syntax for SQL Server and Azure SQL Database
+-- ISO-Compliant Syntax
+
+GROUP BY {
+      column-expression
+    | ROLLUP ( <group_by_expression> [ ,...n ] )
+    | CUBE ( <group_by_expression> [ ,...n ] )
+    | GROUPING SETS ( <grouping_set> [ ,...n ]  )
+    | () --calculates the grand total
+} [ ,...n ]
+
+<group_by_expression> ::=
+      column-expression
+    | ( column-expression [ ,...n ] )
+
+<grouping_set> ::=
+      () --calculates the grand total
+    | <grouping_set_item>
+    | ( <grouping_set_item> [ ,...n ] )
+
+<grouping_set_item> ::=
+      <group_by_expression>
+    | ROLLUP ( <group_by_expression> [ ,...n ] )
+    | CUBE ( <group_by_expression> [ ,...n ] )
+
+
+-- For backward compatibility only.
+-- Non-ISO-Compliant Syntax for SQL Server and Azure SQL Database
+
+GROUP BY {
+       ALL column-expression [ ,...n ]
+    | column-expression [ ,...n ]  WITH { CUBE | ROLLUP }
+       }
+ */
+
+CREATE TABLE Sales ( Country VARCHAR(50), Region VARCHAR(50), Sales INT );
+
+INSERT INTO sales VALUES (N'Canada', N'Alberta', 100);
+INSERT INTO sales VALUES (N'Canada', N'British Columbia', 200);
+INSERT INTO sales VALUES (N'Canada', N'British Columbia', 300);
+INSERT INTO sales VALUES (N'United States', N'Montana', 100);
+
+SELECT Country, Region, SUM(sales) AS TotalSales
+FROM Sales.Sales
+GROUP BY Country, Region;
+----------------------------------------------------------------------------------------------------------
+
+
+SELECT SalesOrderID, SUM(LineTotal) AS SubTotal
+FROM Sales.SalesOrderDetail AS sod
+GROUP BY SalesOrderID
+ORDER BY SalesOrderID;
+
+SELECT a.City, COUNT(bea.AddressID) EmployeeCount
+FROM Person.BusinessEntityAddress AS bea
+    INNER JOIN Person.Address AS a
+        ON bea.AddressID = a.AddressID
+GROUP BY a.City
+ORDER BY a.City;
+
+SELECT DATEPART(yyyy,OrderDate) AS N'Year'
+    ,SUM(TotalDue) AS N'Total Order Amount'
+FROM Sales.SalesOrderHeader
+GROUP BY DATEPART(yyyy,OrderDate)
+ORDER BY DATEPART(yyyy,OrderDate);
+
+SELECT DATEPART(yyyy,OrderDate) AS N'Year'
+    ,SUM(TotalDue) AS N'Total Order Amount'
+FROM Sales.SalesOrderHeader
+GROUP BY DATEPART(yyyy,OrderDate)
+HAVING DATEPART(yyyy,OrderDate) >= N'2003'
+ORDER BY DATEPART(yyyy,OrderDate);
+
+
+----------------------------------------------------------------------------------------------------------
 select * from Sales.SalesOrderDetail;
 --1
 select SpecialOfferID, sum(UnitPrice) as "UnitPrice SUM"
