@@ -1,1 +1,0 @@
-select table_name from USER_TABLES;

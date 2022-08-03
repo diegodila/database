@@ -1,17 +1,17 @@
--- o having é basicamente muito usad em junção com o groupby para filtrar resultados de um agrupamento
+-- o having é basicamente muito usado em junção com o groupby para filtrar resultados de um agrupamento
 -- de uma forma mais simples eu gosto de entender ele como basicamente um where para dados agrupados
 -- a grande diferença entre having e where é que o group by é aplicado depois que os dados já foram agrupados
 -- enquanto o where é aplicado antes dos dados serem agrupados
 
 -- quais nome tem uma ocorrencia maior que 10 vezes
 
-select * from Person.Person
+select * from Person.Person;
 
 select FirstName, count(FirstName) as "FirstName_count"
 from Person.Person
 group by FirstName
 having count(FirstName) >= 10
-order by FirstName_count
+order by FirstName_count;
 
 select FirstName, count(FirstName) as "FirstName_count"
 from Person.Person

@@ -10,6 +10,10 @@ SELECT Name, Color, ProductNumber,
        COALESCE(Color, ProductNumber) AS FirstNotNull
 FROM Production.Product;
 
+SELECT Name, Class, Color, ProductNumber,
+COALESCE(Class, Color, ProductNumber) AS FirstNotNull
+FROM Production.Product;
+
 -------------------------------------------------------------------------------------------------
 SET NOCOUNT ON;
 GO
