@@ -41,15 +41,12 @@ having count(FirstName) > 10
 -- identificar as provincias(stateProvinceID) com o maior numero de cadastros no nosso sistema, é preciso encontrar provincias
 -- que estão registradas no banco de ados mais que 1000 vezes
 
-select * from person.Address
-
 select StateProvinceID, count(StateProvinceID) as "StateProvinceID_Count"
 from person.Address
 group by StateProvinceID
 having count(StateProvinceID) > 1000
 
 -- quais produtos(productId) não estão trazendo em média no mínimo 1 milhão em total de vendas (linetotal)
-select * from sales.SalesOrderDetail
 
 select ProductID, sum(LineTotal) as "LineTotal_Sum"
 from Sales.SalesOrderDetail

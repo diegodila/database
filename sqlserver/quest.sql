@@ -1,16 +1,14 @@
--- some duas colunas da tabela salesOrderDetail
-
 /*     ****** RESULTADOS no response COALESCE.SQL *******
  1.pegar primeiro nulo das colunas (Class, Color, ProductNumber) da tabela product e salvar como firstNotNull
  2.Na tabela products pegar a primeira ocorrencia da linha qual que não é nulo e replicar para o dados na seguinte ordem de campos Color, ProductNumber
  */
 
 /*     ****** RESULTADOS NO response DATE.SQL *******
--- COMO PEGAR A DATA ATUAL E CONCATENAR COM A PALAVRA 'LIMAO'
--- PEGAR O TIMESTAMP EM SELECT
--- PEGAR NA TABELA PERSON AS MODIFICACOES ENTRE 2014 E HOJE
--- PEGAR SOMENTE O ANO ATUAL
--- PEGAR SOMENTE O MES ATUAL
+ 1.COMO PEGAR A DATA ATUAL E CONCATENAR COM A PALAVRA 'LIMAO'
+ 2.PEGAR O TIMESTAMP EM SELECT
+ 3.PEGAR NA TABELA PERSON AS MODIFICACOES ENTRE 2014 E HOJE
+ 4.PEGAR SOMENTE O ANO ATUAL
+ 5.PEGAR SOMENTE O MES ATUAL
 --****** RESULTADOS NO DATE.SQL *******
 */
 
@@ -43,22 +41,17 @@ senao 'over 1000'
 /*     ****** RESULTADOS NO having.SQL *******
  1. Quais nomes tem uma ocorrencia maior que 10 vezes, na tabela Person
  2. Quais sobrenomes tem uma ocorrencia maior que 2 vezes, na tabela Person
- 3.
+ 3. Saber se os nomes Greg , Jeff e Sheena tem uma ocorrencia maior que 10 vezes na tabela Person
+ 4. Quais produtos que no total de vendas estão entre 162k a 500k (salesorderdetail)
+ 5. Quais nomes tem uma ocorrencia maior que 10 vezes, porem somente onde o titulo é 'Mr.'
+ 6. Identificar as provincias(stateProvinceID) com o maior numero de cadastros no nosso sistema, é preciso encontrar provincias que estão registradas no banco de dados mais que 1000 vezes
 */
 
-SELECT FirstName, COUNT(FirstName) count
-FROM Person.Person
-GROUP BY FirstName
-HAVING count(FirstName) >= 10;
+/*     ****** RESULTADOS do lag.SQL *******
+ 1. Selecione o TerritoryName, BussineessEntityID, SalesYTD, desloque o salesYTD 1 linha, na janela do territoryName
+ */
 
-SELECT LastName, count(LastName) count
-FROM Person.Person
-GROUP BY LastName
-HAVING count(LastName) > 2;
-
-select FirstName, count(FirstName) as "FirstName_count"
-from Person.Person
-where FirstName in ('Greg', 'Jeff')
-group by FirstName
-having count(FirstName) >= 10
-order by FirstName_count
+SELECT TerritoryName, BusinessEntityID,SalesYTD,
+       LAG(SalesYTD,2,NULL) OVER ( PARTITION BY TerritoryName ORDER BY BusinessEntityID) PREV
+FROM Sales.vSalesPerson
+WHERE TerritoryName IN (N'Northwest', N'Canada');

@@ -3,15 +3,14 @@
     OVER ( [ partition_by_clause ] order_by_clause )
  */
 
-
 USE AdventureWorks
-GO
 SELECT BusinessEntityID, YEAR(QuotaDate) AS SalesYear, SalesQuota AS CurrentQuota,
        LAG(SalesQuota, 1,0) OVER (ORDER BY YEAR(QuotaDate)) AS PreviousQuota
 FROM Sales.SalesPersonQuotaHistory
 WHERE BusinessEntityID = 275 AND YEAR(QuotaDate) IN ('2005','2006');
 
-
+-- Sintaxe LAG(<qual-campo-voce-quer-deslocar>,<quantidade-que-voce-quer-deslocar>,<valor-default>) OVER(PARTITION BY<JANELA-QUE-VOCE-QUER-DESLOCAR-> ORDER BY <POR-ONDE-ORDERNAR>)
+-- OVER POR DEFAULT DEIXA A JANELA INTEIRA
 SELECT TerritoryName, BusinessEntityID, SalesYTD,
        LAG (SalesYTD, 1, 0) OVER (PARTITION BY TerritoryName ORDER BY SalesYTD DESC) AS PrevRepSales
 FROM Sales.vSalesPerson
@@ -25,7 +24,6 @@ WHERE TerritoryName IN (N'Northwest', N'Canada')
 ORDER BY SalesYTD desc;
 
 CREATE TABLE T (a INT, b INT, c INT);
-GO
 INSERT INTO T VALUES (1, 1, -3), (2, 2, 4), (3, 1, NULL), (4, 3, 1), (5, 2, NULL), (6, 1, 5);
 
 
