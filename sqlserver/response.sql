@@ -97,7 +97,7 @@ FROM Person.Person
 GROUP BY FirstName
 HAVING count(FirstName) >= 10;
 
-SELECT LastName, count(LastName) count
+SELECT LastName, COUNT(LastName) count
 FROM Person.Person
 GROUP BY LastName
 HAVING count(LastName) > 2;
@@ -109,7 +109,7 @@ GROUP BY FirstName
 HAVING count(FirstName) >= 10
 ORDER BY FirstName_count;
 
-SELECT ProductID, sum(LineTotal) LineTotal_SUM
+SELECT ProductID, SUM(LineTotal) LineTotal_SUM
 FROM Sales.SalesOrderDetail
 GROUP BY ProductID
 HAVING SUM(LineTotal) BETWEEN  '162000' AND '500000';
@@ -125,6 +125,7 @@ FROM Person.Address
 GROUP BY StateProvinceID
 HAVING COUNT(StateProvinceID) > 1000;
 -- *********************************************************************
+
 /*     ****** RESULTADOS do lag.SQL *******
  1. Selecione o TerritoryName, BussineessEntityID, SalesYTD, desloque o salesYTD 1 linha, na janela do territoryName
  */
@@ -133,4 +134,39 @@ SELECT TerritoryName, BusinessEntityID,SalesYTD,
        LAG(SalesYTD,2,NULL) OVER ( PARTITION BY TerritoryName ORDER BY BusinessEntityID) PREV
 FROM Sales.vSalesPerson
 WHERE TerritoryName IN (N'Northwest', N'Canada');
+-- *********************************************************************
+
+/*     ****** RESULTADOS DO case.SQL *******
+ 1. Selecione o productNumber e o name transforme o productLine em category 'R' = 'Road', 'M' = 'Mountain','T' = 'Touring', 'S' = 'Other sale items' se não 'Not for sale'  (Production.Product)
+ 2.Selecione o productNumber e o name e depois pesquise o listPrice e transforme em pricerange quando:
+    listprice = 0 sera 'Mfg item - not for resale'
+ < 50 'Under 50'
+ >= 50 and < 250 = 'under 250'
+ >= 250 and < 1000 = 'under 1000'
+senao 'over 1000'
+ */
+
+SELECT   ProductNumber, Category =
+      CASE ProductLine
+         WHEN 'R' THEN 'Road'
+         WHEN 'M' THEN 'Mountain'
+         WHEN 'T' THEN 'Touring'
+         WHEN 'S' THEN 'Other sale items'
+         ELSE 'Not for sale'
+      END,
+   Name
+FROM Production.Product
+ORDER BY ProductNumber;
+
+--2
+SELECT   ProductNumber, Name, "Price Range" =
+      CASE
+         WHEN ListPrice =  0 THEN 'Mfg item - not for resale'
+         WHEN ListPrice < 50 THEN 'Under $50'
+         WHEN ListPrice >= 50 and ListPrice < 250 THEN 'Under $250'
+         WHEN ListPrice >= 250 and ListPrice < 1000 THEN 'Under $1000'
+         ELSE 'Over $1000'
+      END
+FROM Production.Product
+ORDER BY ProductNumber ;
 -- *********************************************************************

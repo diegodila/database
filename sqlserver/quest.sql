@@ -31,7 +31,6 @@
 senao 'over 1000'
  */
 
-
 /*     ****** RESULTADOS NO isnull.SQL *******
  1. selecione todas as colunas da tabela person que tem o suffix nulo
  2. tranforme os dados da tabela person e coluna suffix que são nulos em goiaba *, a coluna transformada deverá chamar énulo
@@ -50,8 +49,3 @@ senao 'over 1000'
 /*     ****** RESULTADOS do lag.SQL *******
  1. Selecione o TerritoryName, BussineessEntityID, SalesYTD, desloque o salesYTD 1 linha, na janela do territoryName
  */
-
-SELECT TerritoryName, BusinessEntityID,SalesYTD,
-       LAG(SalesYTD,2,NULL) OVER ( PARTITION BY TerritoryName ORDER BY BusinessEntityID) PREV
-FROM Sales.vSalesPerson
-WHERE TerritoryName IN (N'Northwest', N'Canada');
