@@ -50,6 +50,41 @@ WHERE Color = 'Silver'
 GROUP BY color;
 -- *********************************************************************
 
+/*     ****** RESULTADOS DO case.SQL *******
+ 1. Selecione o productNumber e o name transforme o productLine em category 'R' = 'Road', 'M' = 'Mountain','T' = 'Touring', 'S' = 'Other sale items' se não 'Not for sale'  (Production.Product)
+ 2.Selecione o productNumber e o name e depois pesquise o listPrice e transforme em pricerange quando:
+    listprice = 0 sera 'Mfg item - not for resale'
+ < 50 'Under 50'
+ >= 50 and < 250 = 'under 250'
+ >= 250 and < 1000 = 'under 1000'
+senao 'over 1000'
+ */
+
+SELECT   ProductNumber, Category =
+      CASE ProductLine
+         WHEN 'R' THEN 'Road'
+         WHEN 'M' THEN 'Mountain'
+         WHEN 'T' THEN 'Touring'
+         WHEN 'S' THEN 'Other sale items'
+         ELSE 'Not for sale'
+      END,
+   Name
+FROM Production.Product
+ORDER BY ProductNumber;
+
+--2
+SELECT   ProductNumber, Name, "Price Range" =
+      CASE
+         WHEN ListPrice =  0 THEN 'Mfg item - not for resale'
+         WHEN ListPrice < 50 THEN 'Under $50'
+         WHEN ListPrice >= 50 and ListPrice < 250 THEN 'Under $250'
+         WHEN ListPrice >= 250 and ListPrice < 1000 THEN 'Under $1000'
+         ELSE 'Over $1000'
+      END
+FROM Production.Product
+ORDER BY ProductNumber ;
+-- *********************************************************************
+
 -- ****** RESULTADOS do COALESCE.SQL *******
 /*
  1.pegar primeiro nulo das colunas (Class, Color, ProductNumber) da tabela product e salvar como firstNotNull
@@ -136,37 +171,3 @@ FROM Sales.vSalesPerson
 WHERE TerritoryName IN (N'Northwest', N'Canada');
 -- *********************************************************************
 
-/*     ****** RESULTADOS DO case.SQL *******
- 1. Selecione o productNumber e o name transforme o productLine em category 'R' = 'Road', 'M' = 'Mountain','T' = 'Touring', 'S' = 'Other sale items' se não 'Not for sale'  (Production.Product)
- 2.Selecione o productNumber e o name e depois pesquise o listPrice e transforme em pricerange quando:
-    listprice = 0 sera 'Mfg item - not for resale'
- < 50 'Under 50'
- >= 50 and < 250 = 'under 250'
- >= 250 and < 1000 = 'under 1000'
-senao 'over 1000'
- */
-
-SELECT   ProductNumber, Category =
-      CASE ProductLine
-         WHEN 'R' THEN 'Road'
-         WHEN 'M' THEN 'Mountain'
-         WHEN 'T' THEN 'Touring'
-         WHEN 'S' THEN 'Other sale items'
-         ELSE 'Not for sale'
-      END,
-   Name
-FROM Production.Product
-ORDER BY ProductNumber;
-
---2
-SELECT   ProductNumber, Name, "Price Range" =
-      CASE
-         WHEN ListPrice =  0 THEN 'Mfg item - not for resale'
-         WHEN ListPrice < 50 THEN 'Under $50'
-         WHEN ListPrice >= 50 and ListPrice < 250 THEN 'Under $250'
-         WHEN ListPrice >= 250 and ListPrice < 1000 THEN 'Under $1000'
-         ELSE 'Over $1000'
-      END
-FROM Production.Product
-ORDER BY ProductNumber ;
--- *********************************************************************

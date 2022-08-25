@@ -15,19 +15,19 @@ insert into tabela_a values ('a');
 insert into tabela_a values ('b');
 insert into tabela_a values ('c');
 insert into tabela_a values ('d');
-insert into tabela_a values ('d');
-insert into tabela_a values ('z');
+insert into tabela_a values ('f');
+insert into tabela_a values ('g');
 
-insert into tabela_b values ('d');
-insert into tabela_b values ('e');
-insert into tabela_b values ('f');
-insert into tabela_b values ('g');
+insert into tabela_b values ('a');
+insert into tabela_b values ('a');
+insert into tabela_b values ('a');
+insert into tabela_b values ('b');
 
 insert into tabela_c values ('c');
-insert into tabela_c values ('d');
 insert into tabela_c values ('b');
-insert into tabela_c values ('a');
-insert into tabela_c values ('x');
+insert into tabela_c values ('g');
+
+
 
 commit;
 
@@ -35,5 +35,8 @@ SELECT elementos_A FROM TABELA_A;
 SELECT elementos_B FROM TABELA_B;
 SELECT elementos_C FROM TABELA_C;
 
-SELECT A.elementos_a, C.ELEMENTOS_C FROM TABELA_A A
-FULL JOIN tabela_c C on A.ELEMENTOS_A = C.ELEMENTOS_C;
+SELECT * FROM TABELA_A A
+left JOIN tabela_c C on A.ELEMENTOS_A = C.ELEMENTOS_C;
+
+select * from tabela_b
+left join TABELA_C TB on tabela_b.elementos_b = TB.ELEMENTOS_C

@@ -20,7 +20,6 @@
  5.saber a media de preco para os produtos que sao pratas(silver)
  */
 
-
 /*     ****** RESULTADOS NO case.SQL *******
  1. Selecione o productNumber e o name transforme o productLine em category 'R' = 'Road', 'M' = 'Mountain','T' = 'Touring', 'S' = 'Other sale items' se não 'Not for sale'  (Production.Product)
  2.Selecione o productNumber e o name e depois pesquise o listPrice e transforme em pricerange quando:
@@ -37,6 +36,7 @@ senao 'over 1000'
  3. Converta os endereços secundários que são nulos em endereços primarios da tabela person.address (FAÇA COM COALESCE TAMBEM)
  */
 
+
 /*     ****** RESULTADOS NO having.SQL *******
  1. Quais nomes tem uma ocorrencia maior que 10 vezes, na tabela Person
  2. Quais sobrenomes tem uma ocorrencia maior que 2 vezes, na tabela Person
@@ -49,3 +49,9 @@ senao 'over 1000'
 /*     ****** RESULTADOS do lag.SQL *******
  1. Selecione o TerritoryName, BussineessEntityID, SalesYTD, desloque o salesYTD 1 linha, na janela do territoryName
  */
+
+select TerritoryName, BusinessEntityID, SalesYTD,
+       lag(SalesYTD,1,null) over (partition by TerritoryName order by BusinessEntityID)
+from sales.vSalesPerson
+where TerritoryName in ('Canada','Northwest')
+order by TerritoryName;
