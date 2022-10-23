@@ -1,4 +1,4 @@
-/*     ****** RESULTADOS NO response DATE.SQL *******
+/*     ****** RESULTADOS do DATE.SQL *******
  1.COMO PEGAR A DATA ATUAL E CONCATENAR COM A PALAVRA 'LIMAO'
  2.PEGAR O TIMESTAMP EM SELECT
  3.PEGAR NA TABELA PERSON AS MODIFICACOES ENTRE 2014 E HOJE
@@ -171,3 +171,12 @@ FROM Sales.vSalesPerson
 WHERE TerritoryName IN (N'Northwest', N'Canada');
 -- *********************************************************************
 
+/*     ****** RESULTADOS do ****.SQL *******
+  Contar os nomes de registros duplicados da tabela Person
+ */
+select FirstName, count(FirstName)
+from Person.Person
+group by FirstName
+having count(FirstName) > 1;
+
+-- *********************************************************************

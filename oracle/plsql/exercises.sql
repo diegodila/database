@@ -7,3 +7,6 @@
  */
 
  select table_name from USER_TABLES;
+
+
+DECLARE @TB TABLE (ID_EstoqueAtivoFixo INT, ID_AtivoFixo INT, i INT)
