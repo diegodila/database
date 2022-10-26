@@ -1,3 +1,5 @@
+DROP TABLE dept PURGE;
+DROP TABLE emp PURGE;
 CREATE TABLE emp(
     empno    NUMBER(4,0),
     ename    VARCHAR2(10),

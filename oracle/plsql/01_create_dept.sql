@@ -1,3 +1,5 @@
+DROP TABLE dept PURGE;
+DROP TABLE emp PURGE;
 CREATE TABLE dept(
     deptno NUMBER(2,0),
     dname  VARCHAR2(14),
