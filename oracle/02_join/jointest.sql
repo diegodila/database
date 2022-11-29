@@ -2,8 +2,16 @@ drop table tabela_a;
 drop table tabela_b;
 drop table tabela_c;
 
-create table tabela_b
-(elementos_b char(1));
+create table dso
+(nome varchar(10), disciplina varchar(10), nota number(3));
+
+select * from dso;
+insert into dso (nome, disciplina, nota) values ('BARBARA','ASSEMBLER',10);
+insert into professor values ('b');
+insert into professor values ('c');
+insert into professor values ('d');
+insert into professor values ('f');
+insert into professor values ('g');
 
 create table tabela_a
 (elementos_a char(1));

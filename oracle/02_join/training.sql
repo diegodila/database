@@ -32,6 +32,7 @@ select * from tabela_d
 where data <> (TO_DATE('18/12/2015', 'DD/MM/YYYY'))
 or elementos_x <> 3;
 
+select * from PROFESSOR;
 select * from tabela_d;
 
 delete
