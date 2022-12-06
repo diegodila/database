@@ -1,5 +1,6 @@
 docker run --name teste-postgres --network=postgres-network -e "POSTGRES_PASSWORD=Postgres2018!" -p 5432:5432 -v /home/renatogroffe/Desenvolvimento/PostgreSQL:/var/lib/postgresql/data -d postgres
 
+-------------------------------------------------------------
 #Start Postgres on docker
 docker run --name postgresql \
 -p 5432:5432 \
@@ -7,8 +8,10 @@ docker run --name postgresql \
 -e POSTGRES_PASSWORD=admin! \
 -e PGDATA=/var/lib/postgresql/data/pgdata \
 -e POSTGRES_DB=postgresD \
--v $HOME/Projects/database/postgresql:/var/lib/postgresql/data -d postgres
+--restart always \
+-d postgres
 
+------------------------------------------------------------
 #Start SQL Server on docker
 sudo docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=##Adm1n@@" \
 -p 1433:1433 --name sql1 --hostname sql1 \
@@ -20,4 +23,4 @@ sudo docker exec -it sql1 "bash"
 #run on into container
 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "##Adm1n@@"
 
-docker run -p 1434:1433 --name sql -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=##Adm1n@@' -d chriseaton/adventureworks:latest
+docker run -p 1433:1433 --name sql -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=##Adm1n@@' -d --restart always chriseaton/adventureworks:latest
