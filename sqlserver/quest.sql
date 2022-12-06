@@ -41,12 +41,11 @@ senao 'over 1000'
  3. Saber se os nomes Greg , Jeff e Sheena tem uma ocorrencia maior que 10 vezes na tabela Person
  4. Quais produtos que no total de vendas estão entre 162k a 500k (salesorderdetail)
  5. Quais nomes tem uma ocorrencia maior que 10 vezes, porem somente onde o titulo é 'Mr.'
- 6. Identificar as provincias(stateProvinceID) com o maior numero de cadastros no nosso sistema, é preciso encontrar provincias que estão registradas no banco de dados mais que 1000 vezes
+ 6. Identificar as provincias(stateProvinceID) com o maior numero de cadastros no nosso sistema, é preciso encontrar provincias que estão registradas no banco de dados mais que 1000 vezes (trazer os nomes das provincias tambem)
 */
 
 /*     ****** RESULTADOS do ****.SQL *******
- 1. Selecione o TerritoryName, BusinessEntityID, SalesYTD, desloque o salesYTD 1 linha, na janela do territoryName
-  Contar os nomes de registros duplicados da tabela Person
+ 1. Selecione o TerritoryName, BusinessEntityID, SalesYTD, desloque o salesYTD 1 linha, na janela do territoryName (vSalesPerson)
  */
 
 /*     ****** RESULTADOS do ****.SQL *******
