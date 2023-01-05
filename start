@@ -11,6 +11,13 @@ docker run --name postgresql \
 --restart always \
 -d postgres
 
+docker run -p 5435:5432 \
+--name paw \
+-e 'POSTGRES_PASSWORD=my_password' \
+--network todo-app --network-alias postgres_network \
+-d chriseaton/adventureworks:postgres
+
+
 ------------------------------------------------------------
 #Start SQL Server on docker
 sudo docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=##Adm1n@@" \
@@ -18,9 +25,9 @@ sudo docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=##Adm1n@@" \
 -d mcr.microsoft.com/mssql/server:2022-latest
 
 #connect on container
-sudo docker exec -it sql1 "bash"
+sudo docker exec -it sql "bash"
 
 #run on into container
-/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "##Adm1n@@"
+/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "##Adm1n16"
 
-docker run -p 1433:1433 --name sql -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=##Adm1n@@' -d --restart always chriseaton/adventureworks:latest
+docker run -p 1433:1433 --name sql -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=##Adm1n16' -d --restart always chriseaton/adventureworks:latest
