@@ -13,6 +13,7 @@ docker run --name postgresql \
 
 docker run -p 5435:5432 \
 --name paw \
+--restart always \
 -e 'POSTGRES_PASSWORD=my_password' \
 --network todo-app --network-alias postgres_network \
 -d chriseaton/adventureworks:postgres
