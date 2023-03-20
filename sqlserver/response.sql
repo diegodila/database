@@ -1,65 +1,48 @@
-/*     ****** RESULTADOS do DATE.SQL *******
- 1.COMO PEGAR A DATA ATUAL E CONCATENAR COM A PALAVRA 'LIMAO'
- 2.PEGAR O TIMESTAMP EM SELECT
- 3.PEGAR NA TABELA PERSON AS MODIFICACOES ENTRE 2014 E HOJE
- 4.PEGAR SOMENTE O ANO ATUAL
- 5.PEGAR SOMENTE O MES ATUAL
---****** RESULTADOS NO DATE.SQL *******
-*/
+-- 1.COMO PEGAR A DATA ATUAL E CONCATENAR COM A PALAVRA 'LIMAO'
 SELECT CONCAT(CAST(GETDATE() AS DATE), 'Limao');
 
+-- 2.PEGAR O TIMESTAMP EM SELECT
 SELECT CURRENT_TIMESTAMP;
 
+-- 3.PEGAR NA TABELA PERSON AS MODIFICACOES ENTRE 2014 E HOJE
 SELECT * FROM person.Person
 WHERE ModifiedDate BETWEEN '2014' and GETDATE();
 
+-- 4.PEGAR SOMENTE O ANO ATUAL
 SELECT DATEPART(yy,GETDATE()) Date;
 
+-- 5.PEGAR SOMENTE O MES ATUAL
 SELECT DATEPART(mm,GETDATE());
--- *********************************************************************
 
-/*     ****** RESULTADOS DO groupby.SQL *******
- 6.somar os preços (unit price) de todas as specialofferid distintas da tabela saleorderdetail
- 7.contar todos os preços da specialofferid distintas da tabela saleorderdetail
- 8.saber a quantidade de produtos distintos (salesorderdetail)
- 9.saber o quantidade de nomes distintos da (person)
- 10.saber a media de preco para os produtos que sao pratas(silver)
- */
-
+--  6.somar os preços (unit price) de todas as specialofferid distintas da tabela saleorderdetail
 SELECT SpecialOfferID, SUM(UnitPrice) AS "UnitPrice SUM"
 FROM Sales.SalesOrderDetail
 GROUP BY SpecialOfferID
 ORDER BY SpecialOfferID;
 
+--  7.contar todos os preços da specialofferid distintas da tabela saleorderdetail
 SELECT SpecialOfferID, COUNT(SpecialOfferID) AS "SpecialOfferID_Count"
 FROM Sales.SalesOrderDetail
 GROUP BY SpecialOfferID
 ORDER BY SpecialOfferID;
 
+--  8.saber a quantidade de produtos distintos (salesorderdetail)
 SELECT ProductID, COUNT(ProductID) AS "ProductID_Count"
 FROM Sales.SalesOrderDetail
 GROUP BY ProductID ORDER BY ProductID;
 
+--  9.saber o quantidade de nomes distintos da (person)
 SELECT FirstName, COUNT(FirstName) AS "FirstName_Count"
 FROM Person.Person
 GROUP BY FirstName ORDER BY FirstName;
 
+--  10.saber a media de preco para os produtos que sao pratas(silver)
 SELECT Color, AVG(ListPrice) AS "ListPrice"
 FROM Production.Product
 WHERE Color = 'Silver'
 GROUP BY color;
--- *********************************************************************
 
-/*     ****** RESULTADOS DO case.SQL *******
- 11. Selecione o productNumber e o name transforme o productLine em category 'R' = 'Road', 'M' = 'Mountain','T' = 'Touring', 'S' = 'Other sale items' se não 'Not for sale'  (Production.Product)
- 12.Selecione o productNumber e o name e depois pesquise o listPrice e transforme em pricerange quando:
-    listprice = 0 sera 'Mfg item - not for resale'
- < 50 'Under 50'
- >= 50 and < 250 = 'under 250'
- >= 250 and < 1000 = 'under 1000'
-senao 'over 1000'
- */
-
+--  11. Selecione o productNumber e o name transforme o productLine em category 'R' = 'Road', 'M' = 'Mountain','T' = 'Touring', 'S' = 'Other sale items' se não 'Not for sale'  (Production.Product)
 SELECT   ProductNumber, Category =
       CASE ProductLine
          WHEN 'R' THEN 'Road'
@@ -72,7 +55,7 @@ SELECT   ProductNumber, Category =
 FROM Production.Product
 ORDER BY ProductNumber;
 
---2
+--  12.Selecione o productNumber e o name e depois pesquise o listPrice e transforme em pricerange quando: listprice = 0 sera 'Mfg item - not for resale' , < 50 'Under 50', >= 50 and < 250 = 'under 250', >= 250 and < 1000 = 'under 1000', senao 'over 1000'
 SELECT   ProductNumber, Name, "Price Range" =
       CASE
          WHEN ListPrice =  0 THEN 'Mfg item - not for resale'
@@ -83,34 +66,24 @@ SELECT   ProductNumber, Name, "Price Range" =
       END
 FROM Production.Product
 ORDER BY ProductNumber ;
--- *********************************************************************
 
--- ****** RESULTADOS do COALESCE.SQL *******
-/*
- 13.pegar primeiro nulo das colunas (Class, Color, ProductNumber) da tabela product e salvar como firstNotNull
- 14.Na tabela products pegar a primeira ocorrencia da linha qual que não é nulo e replicar para o dados na seguinte ordem de campos Color, ProductNumber
- */
-
+--  13.pegar primeiro nulo das colunas (Class, Color, ProductNumber) da tabela product e salvar como firstNotNull
 SELECT Name, Class, Color, ProductNumber,
        COALESCE(Class,Color,ProductNumber) FirstNotNull
 from production.Product;
 
+--  14.Na tabela products pegar a primeira ocorrencia da linha qual que não é nulo e replicar para o dados na seguinte ordem de campos Color, ProductNumber
 SELECT Name, Color, ProductNumber,
        COALESCE(Color, ProductNumber) AS FirstNotNull
 FROM Production.Product;
--- *********************************************************************
 
-/*     ****** RESULTADOS DO isnull.SQL *******
- 15. selecione todas as colunas da tabela person que tem o suffix nulo
- 16. tranforme os dados da tabela person e coluna suffix que são nulos em goiaba *, a coluna transformada deverá chamar énulo
- 17. Converta os endereços secundários que são nulos em endereços primarios da tabela person.address
- */
-
+--  15. selecione todas as colunas da tabela person que tem o suffix nulo
 SELECT * FROM PERSON.Person
 WHERE Suffix IS NULL;
-
+--  16. tranforme os dados da tabela person e coluna suffix que são nulos em goiaba *, a coluna transformada deverá chamar énulo
 SELECT ISNULL(Suffix,'GOIABA') ÉNULO,* FROM PERSON.Person
 
+--  17. Converta os endereços secundários que são nulos em endereços primarios da tabela person.address (FAÇA COM COALESCE TAMBEM)
 SELECT AddressLine1,AddressLine2,ISNULL(AddressLine2,AddressLine1) ÉNULO
 FROM Person.Address;
 
