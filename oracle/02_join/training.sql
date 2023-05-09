@@ -51,6 +51,7 @@ insert into tabela_f values (6);
 insert into tabela_f values (7);
 insert into tabela_f values (8);
 
+select * from tabela_e;
 commit;
 
 SELECT elementos_d FROM tabela_d;

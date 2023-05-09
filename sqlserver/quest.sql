@@ -3,6 +3,10 @@
 --  2.PEGAR O TIMESTAMP EM SELECT
 
 --  3.PEGAR NA TABELA PERSON AS MODIFICACOES ENTRE 2014 E HOJE
+use AdventureWorks
+select count(*) from person.Person
+where ModifiedDate between '2014' and getdate()
+and ModifiedDate is null
 
 --  4.PEGAR SOMENTE O ANO ATUAL
 
