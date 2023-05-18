@@ -129,13 +129,6 @@ FROM Person.Address
 GROUP BY StateProvinceID
 HAVING COUNT(StateProvinceID) > 1000;
 
-
-
-
-
-
-
-
 --  24. Selecione o TerritoryName, BussineessEntityID, SalesYTD, desloque o salesYTD 1 linha, na janela do territoryName
 SELECT TerritoryName, BusinessEntityID,SalesYTD,
        LAG(SalesYTD,2,NULL) OVER ( PARTITION BY TerritoryName ORDER BY BusinessEntityID) PREV
