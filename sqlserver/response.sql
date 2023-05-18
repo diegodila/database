@@ -89,27 +89,20 @@ FROM Person.Address;
 
 SELECT AddressLine1,AddressLine2, COALESCE(AddressLine2,AddressLine1)ÉNULO
 FROM Person.Address;
--- *********************************************************************
 
-/*     ****** RESULTADOS DO having.SQL *******
- 18. Quais nomes tem uma ocorrencia maior que 10 vezes, na tabela Person
- 19. Quais sobrenomes tem uma ocorrencia maior que 2 vezes, na tabela Person
- 20. Saber se os nomes Greg , Jeff e Sheena tem uma ocorrencia maior que 10 vezes na tabela Person
- 21. Quais produtos que no total de vendas estão entre 162k a 500k (salesorderdetail)
- 22. Quais nomes tem uma ocorrencia maior que 10 vezes, porem somente onde o titulo é 'Mr.'
- 23. Identificar as provincias(stateProvinceID) com o maior numero de cadastros no nosso sistema, é preciso encontrar provincias que estão registradas no banco de dados mais que 1000 vezes
-*/
-
+--  18. Quais nomes tem uma ocorrencia maior que 10 vezes, na tabela Person
 SELECT FirstName, COUNT(FirstName) count
 FROM Person.Person
 GROUP BY FirstName
 HAVING count(FirstName) >= 10;
 
+--  19. Quais sobrenomes tem uma ocorrencia maior que 2 vezes, na tabela Person
 SELECT LastName, COUNT(LastName) count
 FROM Person.Person
 GROUP BY LastName
 HAVING count(LastName) > 2;
 
+--  20. Saber se os nomes Greg , Jeff e Sheena tem uma ocorrencia maior que 10 vezes na tabela Person
 SELECT FirstName, COUNT(FirstName) as "FirstName_count"
 FROM Person.Person
 WHERE FirstName IN ('Greg', 'Jeff', 'Sheena')
@@ -117,39 +110,40 @@ GROUP BY FirstName
 HAVING count(FirstName) >= 10
 ORDER BY FirstName_count;
 
+--  21. Quais produtos que no total de vendas estão entre 162k a 500k (salesorderdetail)
 SELECT ProductID, SUM(LineTotal) LineTotal_SUM
 FROM Sales.SalesOrderDetail
 GROUP BY ProductID
 HAVING SUM(LineTotal) BETWEEN  '162000' AND '500000';
 
+--  22. Quais nomes tem uma ocorrencia maior que 10 vezes, porem somente onde o titulo é 'Mr.'
 SELECT FirstName, COUNT(FirstName) COUNT
 FROM Person.Person
 WHERE Title LIKE '%Mr.'
 GROUP BY FirstName
 HAVING COUNT(FirstName) > 10;
 
+--  23. Identificar as provincias(stateProvinceID) com o maior numero de cadastros no nosso sistema, é preciso encontrar provincias que estão registradas no banco de dados mais que 1000 vezes
 SELECT StateProvinceID, COUNT(StateProvinceID) COUNT_STATE
 FROM Person.Address
 GROUP BY StateProvinceID
 HAVING COUNT(StateProvinceID) > 1000;
--- *********************************************************************
 
-/*     ****** RESULTADOS do lag.SQL *******
- 1. Selecione o TerritoryName, BussineessEntityID, SalesYTD, desloque o salesYTD 1 linha, na janela do territoryName
- */
 
+
+
+
+
+
+
+--  24. Selecione o TerritoryName, BussineessEntityID, SalesYTD, desloque o salesYTD 1 linha, na janela do territoryName
 SELECT TerritoryName, BusinessEntityID,SalesYTD,
        LAG(SalesYTD,2,NULL) OVER ( PARTITION BY TerritoryName ORDER BY BusinessEntityID) PREV
 FROM Sales.vSalesPerson
 WHERE TerritoryName IN (N'Northwest', N'Canada');
--- *********************************************************************
 
-/*     ****** RESULTADOS do ****.SQL *******
-  Contar os nomes de registros duplicados da tabela Person
- */
+-- 25. Contar os nomes de registros duplicados da tabela Person
 select FirstName, count(FirstName)
 from Person.Person
 group by FirstName
 having count(FirstName) > 1;
-
--- *********************************************************************
