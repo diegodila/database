@@ -135,6 +135,33 @@ SELECT TerritoryName, BusinessEntityID,SalesYTD,
 FROM Sales.vSalesPerson
 WHERE TerritoryName IN (N'Northwest', N'Canada');
 
+SELECT TerritoryName, BusinessEntityID,SalesYTD,
+       LAG(SalesYTD,1) OVER ( PARTITION BY TerritoryName ORDER BY BusinessEntityID) PREV
+FROM Sales.vSalesPerson
+WHERE TerritoryName IN (N'Northwest', N'Canada')
+order by  TerritoryName;
+
+select TerritoryName,BusinessEntityID,SalesYTD,
+       lead(SalesYTD,1,null) over (partition by TerritoryName order by BusinessEntityID) as teste
+from sales.vSalesPerson;
+
+select TerritoryName,BusinessEntityID,SalesYTD,
+       lead(SalesYTD,1,null) over (partition by TerritoryName order by BusinessEntityID) as teste
+from sales.vSalesPerson
+WHERE TerritoryName IN (N'Northwest', N'Canada','Northeast');
+
+SELECT
+  ROW_NUMBER() OVER(ORDER BY name ASC) AS Row#,
+  name, recovery_model_desc
+FROM sys.databases
+WHERE database_id < 5;
+
+select TerritoryName, BusinessEntityID, SalesYTD
+--        row_number() over (partition by TerritoryName order by TerritoryName) row_number
+from sales.vSalesPerson
+WHERE TerritoryName IN (N'Northwest', N'Canada','Southwest')
+order by TerritoryName;
+
 -- 25. Contar os nomes de registros duplicados da tabela Person
 select FirstName, count(FirstName)
 from Person.Person

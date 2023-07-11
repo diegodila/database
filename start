@@ -35,9 +35,10 @@ sudo docker exec -it sql "bash"
 
 docker run \
 -p 1433:1433 \
---name sql \
+--name mssql \
 -e 'ACCEPT_EULA=Y' \
 -e 'SA_PASSWORD=##Adm1n16' \
+--network todo-app --network-alias mssql_network \
 -d --restart always chriseaton/adventureworks:latest
 
 -----------------------------------------------------

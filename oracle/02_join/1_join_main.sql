@@ -32,5 +32,5 @@ SELECT 1 FROM DUAL;
 select * from A;
 select * from B;
 
-select * from B inner join A on B.id = A.ID or A.data = B.data;
+select * from B inner join A on B.id = A.ID and A.data = B.data;
 

@@ -42,35 +42,24 @@
 --  21. Quais produtos que no total de vendas estão entre 162k a 500k (salesorderdetail)
 
 --  22. Quais nomes tem uma ocorrencia maior que 10 vezes, porem somente onde o titulo é 'Mr.'
+select FirstName, count(FirstName)
+from person.person
+where Title = 'Mr.'
+group by FirstName
+having count(FirstName) > 10;
 
 --  23. Identificar as provincias(stateProvinceID) com o maior numero de cadastros no nosso sistema, é preciso encontrar provincias que estão registradas no banco de dados mais que 1000 vezes (trazer os nomes das provincias tambem)
+select StateProvinceID, count(StateProvinceID) count
+from Person.Address
+group by StateProvinceID
+having count(StateProvinceID) > 1000;
 
 -- 24. Selecione o TerritoryName, BusinessEntityID, SalesYTD, desloque o salesYTD 1 linha, na janela do territoryName (vSalesPerson)
-SELECT TerritoryName, BusinessEntityID,SalesYTD,
-       LAG(SalesYTD,1) OVER ( PARTITION BY TerritoryName ORDER BY BusinessEntityID) PREV
-FROM Sales.vSalesPerson
-WHERE TerritoryName IN (N'Northwest', N'Canada')
-order by  TerritoryName;
-
-select TerritoryName,BusinessEntityID,SalesYTD,
-       lead(SalesYTD,1,null) over (partition by TerritoryName order by BusinessEntityID) as teste
-from sales.vSalesPerson;
-
-select TerritoryName,BusinessEntityID,SalesYTD,
-       lead(SalesYTD,1,null) over (partition by TerritoryName order by BusinessEntityID) as teste
+select TerritoryName, BusinessEntityID, SalesYTD,
+       lag(SalesYTD,1,0) over (partition by TerritoryName order by BusinessEntityID)
 from sales.vSalesPerson
-WHERE TerritoryName IN (N'Northwest', N'Canada','Northeast');
-
-SELECT
-  ROW_NUMBER() OVER(ORDER BY name ASC) AS Row#,
-  name, recovery_model_desc
-FROM sys.databases
-WHERE database_id < 5;
-
-select TerritoryName, BusinessEntityID, SalesYTD
---        row_number() over (partition by TerritoryName order by TerritoryName) row_number
-from sales.vSalesPerson
-WHERE TerritoryName IN (N'Northwest', N'Canada','Southwest')
-order by TerritoryName;
-
 -- 25. Contar os nomes de registros duplicados da tabela Person
+select FirstName, count(FirstName)
+from person.Person
+group by FirstName
+having count(FirstName) > 1;
