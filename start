@@ -1,15 +1,6 @@
-docker run --name teste-postgres --network=postgres-network -e "POSTGRES_PASSWORD=Postgres2018!" -p 5432:5432 -v /home/renatogroffe/Desenvolvimento/PostgreSQL:/var/lib/postgresql/data -d postgres
+CREATING DATABASE POSTGRESQL
 
--------------------------------------------------------------
-#Start Postgres on docker
-docker run --name postgresql \
--p 5432:5432 \
--e POSTGRES_USER=diegodila \
--e POSTGRES_PASSWORD=admin! \
--e PGDATA=/var/lib/postgresql/data/pgdata \
--e POSTGRES_DB=postgresD \
---restart always \
--d postgres
+docker network create todo-app
 
 docker run -p 5435:5432 \
 --name paw \
@@ -19,8 +10,37 @@ docker run -p 5435:5432 \
 -d chriseaton/adventureworks:postgres
 
 
+#Start Postgres on docker
+docker run --name postgresql \
+#-p 5432:5432 \
+#-e POSTGRES_USER=diegodila \
+#-e POSTGRES_PASSWORD=admin! \
+#-e PGDATA=/var/lib/postgresql/data/pgdata \
+#-e POSTGRES_DB=postgresD \
+#--restart always \
+#-d postgres
+
+#docker run --name teste-postgres --network=postgres-network -e "POSTGRES_PASSWORD=Postgres2018!" -p 5432:5432 -v /home/renatogroffe/Desenvolvimento/PostgreSQL:/var/lib/postgresql/data -d postgres
+
 ------------------------------------------------------------
-#Start SQL Server on docker
+CREATING SQL SERVER ADVENTUREWORKS ON DOCKER
+
+docker run \
+-p 1433:1433 \
+--name mssql \
+-e 'ACCEPT_EULA=Y' \
+-e 'SA_PASSWORD=##Adm1n16' \
+--network todo-app --network-alias mssql_network \
+-d --restart always chriseaton/adventureworks:latest
+
+docker run \
+-p 1433:1433 \
+--name mssql \
+-e 'ACCEPT_EULA=Y' \
+-e 'SA_PASSWORD=##Adm1n16' \
+--network todo-app --network-alias mssql_network \
+-d --restart always chriseaton/adventureworks:latest
+
 sudo docker run \
 -e "ACCEPT_EULA=Y" \
 -e "SA_PASSWORD=##Adm1n@@" \
@@ -33,16 +53,9 @@ sudo docker exec -it sql "bash"
 #run on into container
 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "##Adm1n16"
 
-docker run \
--p 1433:1433 \
---name mssql \
--e 'ACCEPT_EULA=Y' \
--e 'SA_PASSWORD=##Adm1n16' \
---network todo-app --network-alias mssql_network \
--d --restart always chriseaton/adventureworks:latest
 
 -----------------------------------------------------
-#Start oracle database on docker
+CREATING ORACLE DATABASE ON DOCKER
 
 docker run -d --name oracle \
 -p 1521:1521 -p 5500:5500 \
