@@ -58,6 +58,7 @@ sudo docker exec -it sql "bash"
 CREATING ORACLE DATABASE ON DOCKER
 
 docker run -d --name oracle \
+--restart always \
 -p 1521:1521 -p 5500:5500 \
 -e ORACLE_PDB=diego \
 -e ORACLE_PWD=ADmi112 \
