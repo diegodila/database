@@ -25,11 +25,22 @@ docker run --name postgresql \
 ------------------------------------------------------------
 CREATING SQL SERVER ADVENTUREWORKS ON DOCKER
 
+docker run -e "ACCEPT_EULA=Y" \
+-e "SA_PASSWORD=testingdb@001" \
+-e "MSSQL_PID=Evaluation" \
+-p 1432:1433  \
+--network todo-app --network-alias mssql_network \
+--name awsql --hostname awsql \
+-d --restart always chriseaton/adventureworks:latest
+
+docker exec -it awsql bash
+/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "testingdb@001"
+
 docker run \
--p 1433:1433 \
+-p 1432:1433 \
 --name mssql \
 -e 'ACCEPT_EULA=Y' \
--e 'SA_PASSWORD=##Adm1n16' \
+-e 'MSSQL_SA_PASSWORD=1Secure*Password1' \
 --network todo-app --network-alias mssql_network \
 -d --restart always chriseaton/adventureworks:latest
 
@@ -37,13 +48,19 @@ docker run \
 -p 1433:1433 \
 --name mssql \
 -e 'ACCEPT_EULA=Y' \
--e 'SA_PASSWORD=##Adm1n16' \
+-e 'MSSQL_SA_PASSWORD=@@12fdgh' \
 --network todo-app --network-alias mssql_network \
 -d --restart always chriseaton/adventureworks:latest
+
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=pass12@!" \
+-p 1433:1433 --name sql1 --hostname sql1 -d \
+--network todo-app --network-alias mssql_network \
+mcr.microsoft.com/mssql/server:2022-latest
+
 
 sudo docker run \
 -e "ACCEPT_EULA=Y" \
--e "SA_PASSWORD=##Adm1n@@" \
+-e "MSSQL_SA_PASSWORD='##Adm1n@@'" \
 -p 1433:1433 --name sql1 --hostname sql1 \
 -d mcr.microsoft.com/mssql/server:2022-latest
 
@@ -51,8 +68,8 @@ sudo docker run \
 sudo docker exec -it sql "bash"
 
 #run on into container
-/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "##Adm1n16"
-
+/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "1Secure*Password1"
+/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "testingdb@001"
 
 -----------------------------------------------------
 CREATING ORACLE DATABASE ON DOCKER
