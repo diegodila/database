@@ -26,7 +26,6 @@
 
 --  14.Na tabela products pegar a primeira ocorrencia da linha qual que não é nulo e replicar para o dados na seguinte ordem de campos Color, ProductNumber
 
-
 --  15. selecione todas as colunas da tabela person que tem o suffix nulo
 
 --  16. tranforme os dados da tabela person e coluna suffix que são nulos em goiaba *, a coluna transformada deverá chamar énulo
