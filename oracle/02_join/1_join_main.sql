@@ -32,5 +32,22 @@ SELECT 1 FROM DUAL;
 select * from A;
 select * from B;
 
-select * from B inner join A on B.id = A.ID and A.data = B.data;
+select * from B left join A on B.id = A.ID;
 
+
+1b | 1a
+2b | 2a
+3b | 3a
+3b | 3a
+4b | null
+4b | null
+5b | null
+1b | 1a
+2b | 2a
+3b | 3a
+3b | 3a
+4b | null
+4b | null
+5b | null
+
+select * from a;

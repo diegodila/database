@@ -29,3 +29,9 @@ select S.StateProvinceID, S.Name Province, A.StateProvinceID, A.City
 from Person.StateProvince S
 inner join Person.Address A on S.StateProvinceID = A.StateProvinceID
 where Name = 'Ontario'
+
+SELECT ProductID, Purchasing.Vendor.BusinessEntityID, Name
+FROM Purchasing.ProductVendor INNER JOIN Purchasing.Vendor
+    ON (Purchasing.ProductVendor.BusinessEntityID = Purchasing.Vendor.BusinessEntityID)
+WHERE StandardPrice > $10
+  AND Name LIKE N'F%';
