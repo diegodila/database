@@ -1,17 +1,3 @@
-drop table A;
-drop table B;
-drop table C;
-
-create table A
-(ID char(1), numeros char(5), data date);
-
-create table B
-(ID char(1), numeros char(5), data date);
-
-create table C
-(ID char(1), numeros char(5), data date);
-
-
 INSERT ALL
    INTO A (id, numeros, data) VALUES (1, 101, TO_DATE('20/07/2022', 'DD/MM/YYYY'))
    INTO A (id, numeros, data) VALUES (2, 102, TO_DATE('11/11/2132', 'DD/MM/YYYY'))
@@ -29,28 +15,11 @@ INSERT ALL
    INTO B (id, numeros, data) VALUES (5, 203, TO_DATE('23/03/2023', 'DD/MM/YYYY'))
 SELECT 1 FROM DUAL;
 
-select * from A;
-select * from B;
+/*
+ 3. Create  queries with INNER JOIN (not WHERE or cross join):
+WHERE clause joins are preferred by some SQL developers, as in the examples below:
 
+ A Cartesian Connection, also known as a Cartesian Product or a CROSS JOIN, is produced by this kind of join. A Cartesian Join creates every conceivable combination of the variables. If we had 1,000 customers and 1,000 in total sales in this example, the query would first produce 1,000,000 results before filtering for the 1,000 entries where CustomerID is correctly connected. The database has performed 100 times more work than was necessary, therefore this is a wasteful use of its resources. Due to the possibility of producing billions or trillions of results, Cartesian Joins pose a particular challenge for large-scale databases.
+ */
 
-select * from A left join B on (A.id = B.id);
-
-select * from B left join A on B.id = A.ID;
-
-
-1b | 1a
-2b | 2a
-3b | 3a
-3b | 3a
-4b | null
-4b | null
-5b | null
-1b | 1a
-2b | 2a
-3b | 3a
-3b | 3a
-4b | null
-4b | null
-5b | null
-
-select * from a;
+select * from a,b;
